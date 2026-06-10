@@ -1,5 +1,7 @@
 # RAG Python — Consulta Inteligente em Documentos
 
+![CI](https://github.com/Dimitrearaujo/rag-python-documentos/actions/workflows/ci.yml/badge.svg)
+
 Sistema RAG (Retrieval-Augmented Generation) em Python puro — ingere PDFs e textos, gera embeddings, armazena em SQLite e responde perguntas via Claude.
 
 Sem dependencias pesadas: sem LangChain, sem Chroma, sem FAISS. SQLite + OpenAI Embeddings + Claude.
