@@ -29,6 +29,11 @@ def chunk_text(
 
         if chunk.strip():
             chunks.append(chunk.strip())
-        start = end - overlap
+
+        if end >= len(words):
+            break
+
+        new_start = end - overlap
+        start = new_start if new_start > start else start + 1
 
     return chunks
