@@ -83,3 +83,79 @@ Embeddings sao salvos em `~/.rag-cache/embeddings/` (hash MD5 do texto). Re-inge
 ## Licenca
 
 MIT
+
+---
+
+<details>
+<summary>🇺🇸 English</summary>
+
+# RAG Python — Intelligent Document Q&A
+
+![CI](https://github.com/Dimitrearaujo/rag-python-documentos/actions/workflows/ci.yml/badge.svg)
+
+RAG (Retrieval-Augmented Generation) system in pure Python — ingests PDFs and text files, generates embeddings, stores in SQLite and answers questions via Claude.
+
+No heavy dependencies: no LangChain, no Chroma, no FAISS. SQLite + OpenAI Embeddings + Claude.
+
+## Flow
+
+`
+PDF / TXT / MD
+      |
+   loader.py (pypdf)
+      |
+   chunker.py (500 words, 50 overlap)
+      |
+   embeddings.py (text-embedding-3-small)
+      |
+   vectorstore.db (SQLite)
+      |
+   query.py → retriever.py (cosine similarity)
+      |
+   generator.py (Claude Haiku)
+      |
+   Answer grounded in your documents
+`
+
+## Installation
+
+`ash
+git clone https://github.com/Dimitrearaujo/rag-python-documentos
+cd rag-python-documentos
+pip install -r requirements.txt
+
+cp .env.example .env
+# Edit .env with your keys
+`
+
+## Usage
+
+`ash
+# Ingest documents
+python ingest.py contract.pdf manual.pdf report.txt
+
+# Re-ingest (if file was updated)
+python ingest.py contract.pdf --force
+
+# Query
+python query.py "What is the delivery deadline in the contract?"
+
+# See only retrieved chunks, without generating answer
+python query.py "Termination clauses" --no-generate
+
+# Retrieve more chunks (default: 5)
+python query.py "Penalties" --top-k 8
+`
+
+## Use cases
+
+- Contracts and legal documents
+- Technical manuals and procedures
+- Internal knowledge bases
+- Reports and spreadsheets exported as text
+
+## License
+
+MIT
+
+</details>
