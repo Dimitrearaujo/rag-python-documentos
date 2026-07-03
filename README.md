@@ -99,7 +99,7 @@ No heavy dependencies: no LangChain, no Chroma, no FAISS. SQLite + OpenAI Embedd
 
 ## Flow
 
-`
+```
 PDF / TXT / MD
       |
    loader.py (pypdf)
@@ -115,22 +115,22 @@ PDF / TXT / MD
    generator.py (Claude Haiku)
       |
    Answer grounded in your documents
-`
+```
 
 ## Installation
 
-`ash
+```bash
 git clone https://github.com/Dimitrearaujo/rag-python-documentos
 cd rag-python-documentos
 pip install -r requirements.txt
 
 cp .env.example .env
 # Edit .env with your keys
-`
+```
 
 ## Usage
 
-`ash
+```bash
 # Ingest documents
 python ingest.py contract.pdf manual.pdf report.txt
 
@@ -145,7 +145,24 @@ python query.py "Termination clauses" --no-generate
 
 # Retrieve more chunks (default: 5)
 python query.py "Penalties" --top-k 8
-`
+```
+
+## Modules
+
+| File | Function |
+|---|---|
+| `rag/loader.py` | Loads PDF, TXT, MD |
+| `rag/chunker.py` | Splits text into chunks with overlap |
+| `rag/embeddings.py` | OpenAI text-embedding-3-small, local cache |
+| `rag/vectorstore.py` | SQLite — stores chunks and embeddings |
+| `rag/retriever.py` | Cosine similarity, returns top-K chunks |
+| `rag/generator.py` | Claude Haiku — answers based on context |
+| `ingest.py` | Ingestion CLI |
+| `query.py` | Query CLI |
+
+## Embeddings cache
+
+Embeddings are saved to `~/.rag-cache/embeddings/` (MD5 hash of the text). Re-ingesting the same file doesn't re-embed identical chunks — saves tokens.
 
 ## Use cases
 
@@ -159,3 +176,7 @@ python query.py "Penalties" --top-k 8
 MIT
 
 </details>
+
+---
+
+[← Back to profile](https://github.com/Dimitrearaujo)
